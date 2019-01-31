@@ -49,4 +49,4 @@ def gradient_descent(x,y_,w,b,l=0):
 W=y**2
 b=y**3
 err,w,b=gradient_descent(x[:,0],x[:,1],W,b)
-print(err)
+print(err) 

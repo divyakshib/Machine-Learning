@@ -1,10 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 u1=np.array([2,5])
-cov1=np.array([[1,2],
-               [1,0]])
+cov1=np.array([[1,4],
+               [1,1]])
 u2=np.array([6,1])
-cov2=np.array([[-1,-1],[0,1]])
+cov2=np.array([[-1,-3],[1,-1]])
 x1=np.random.multivariate_normal(u1,cov1,400)
 x2=np.random.multivariate_normal(u2,cov2,200)
 y=np.zeros(600)

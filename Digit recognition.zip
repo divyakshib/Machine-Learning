@@ -1,0 +1,70 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from numpy import exp, array, random, dot, tanh
+
+weight_matrix = 2 * random.random((3, 1)) - 1
+
+def tanh(x):
+    return tanh(x)
+
+
+def tanh_derivative(x):
+    return 1.0 - tanh(x) ** 2
+
+    # forward propagation
+def forward_propagation( inputs):
+    return tanh(dot(inputs, weight_matrix))
+
+    # training the neural network.
+def train(train_inputs, train_outputs,num_train_iterations,weight_matrix):
+
+    for iteration in range(num_train_iterations):
+        output = forward_propagation(train_inputs)
+
+        error = train_outputs - output
+
+
+        adjustment = dot(train_inputs.T, error *tanh_derivative(output))
+
+        weight_matrix += adjustment
+
+        # Driver Code
+
+
+df=pd.read_csv('/home/divyakshi/PycharmProjects/Machine_learning/train.csv')
+test=pd.read_csv('/home/divyakshi/PycharmProjects/Machine_learning/test (1).csv')
+data=df.values
+test_data=test.values
+train_X=data[:,1:]
+train_Y=data[:,0]
+
+def distance(x,y):
+    return np.sqrt(sum((x-y)**2))
+
+def knn(x,y,q,k=100):
+    values=[]
+    m=x.shape[0]
+    for i in range(m):
+        d=distance(x[i],q)
+        values.append((d,y[i]))
+    values.sort()
+    vals=values[:k]
+    vals=np.array(vals)
+    c=np.unique(vals[:,1],return_counts=True)
+    index=c[1].argmax()
+    pred=c[0][index]
+    return pred
+
+def draw(sample):
+    img=sample.reshape((28,28))
+    plt.imshow(img)
+    plt.show()
+draw(test[5])
+train(train_X,train_Y,10,weight_matrix)
+l=knn(train_X,train_Y,test[5])
+print(l)
+
+
+
